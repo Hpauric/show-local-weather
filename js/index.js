@@ -14,9 +14,7 @@ function celciusToFahrenheit(celcius) {
 
 function runWeatherAjax(latitude, longitude) {
   var weatherUrl = 'https://api.darksky.net/forecast/4ad85cdfc9b22bcc12afacae1c4234d1/' + 
-  latitude + 
-  '&lon=' + longitude + 
-  '&APPID=c61f567cd175ce7a781517bc769dab46' + '&units=metric';
+  latitude + ',' + longitude;
   $.ajax({
     url: weatherUrl,
     success: function success(data) {
