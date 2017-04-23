@@ -1,5 +1,8 @@
 "use strict";
 
+/* global $ */
+/* global navigator */
+
 var celcius;
 var fahrenheit;
 var displayTempCel = true;
@@ -47,9 +50,9 @@ $(document).ready(function () {
   function showPosition(position) {
     var lat = position.coords.latitude;
     var lon = position.coords.longitude;
-    //console.log(lat);
+    console.log(lat);
     //getWeather(lat, lon);
-    //console.log(position);
+    console.log(position);
   }
 
   $("#toggleTemp").on('click', function () {
