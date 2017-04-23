@@ -1,0 +1,53 @@
+.background{
+  background-color: #1e88e5;
+  height: 100vh;
+}
+
+.myDiv{
+  //height: 5vh;
+  margin: 1vh;
+  
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 80px;
+  padding-bottom: 20px;
+  color: #e3f2fd;
+  font-family: 'Helvetica', sans-serif;
+}
+
+i{
+  font-size: 120px;
+}
+
+p{
+  font-size: 26px;
+  text-transform: capitalize;
+  color: #e3f2fd;
+}
+
+.well{
+   background: #1e88e5;
+}
+
+body{
+  //background-color: #e3f2fd;
+  font-family: 'Roboto', sans-serif;
+}
+
+.temperature-button{
+  height: 26px;
+  background-color: #1e88e5;
+  font-size: 26px;
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+  outline: none !important;
+}
+
+temperature-button:hover {
+    color: #1e88e5;
+    background-color: #e3f2fd;
+    //border-color: #FFFAF3; /*set the color you want here*/
+}
