@@ -12,11 +12,17 @@ function celciusToFahrenheit(celcius) {
   return fahrenheit;
 }
 
-function runSecondAjax(latitude, longitude) {
-  var weatherUrl = 'http://api.openweathermap.org/data/2.5/weather?lat=' + latitude + '&lon=' + longitude + '&APPID=c61f567cd175ce7a781517bc769dab46' + '&units=metric';
+function runWeatherAjax(latitude, longitude) {
+  var weatherUrl = 'https://api.darksky.net/forecast/4ad85cdfc9b22bcc12afacae1c4234d1/' + 
+  latitude + 
+  '&lon=' + longitude + 
+  '&APPID=c61f567cd175ce7a781517bc769dab46' + '&units=metric';
   $.ajax({
     url: weatherUrl,
     success: function success(data) {
+      
+      console.log(data);
+      
       var summary = data.weather[0].description;
       celcius = Math.round(data.main.temp);
       fahrenheit = Math.round(celciusToFahrenheit(celcius));
@@ -46,10 +52,10 @@ function getLocation() {
 function showPosition(position) {
   var latitude = position.coords.latitude;
   var longitude = position.coords.longitude;
-  console.log(lat);
+  console.log(latitude);
   console.log(position);
   //country = data.country;
-  runSecondAjax(latitude, longitude);
+  runWeatherAjax(latitude, longitude);
   //getWeather(lat, lon);
 }
 
