@@ -2,41 +2,51 @@
 
 /* global $ */
 /* global navigator */
+/* global Skycons */
 
-var celcius;
-var fahrenheit;
-var displayTempCel = true;
+
+const skycons = new Skycons({"color": "#e3f2fd"});
+let celcius;
+let fahrenheit;
 
 function celciusToFahrenheit(celcius) {
   fahrenheit = celcius * 9 / 5 + 32;
   return fahrenheit;
 }
 
-function runWeatherAjax(latitude, longitude) {
-  var weatherUrl = 'https://api.darksky.net/forecast/4ad85cdfc9b22bcc12afacae1c4234d1/' + 
-  latitude + ',' + longitude;
+function runWeatherAjax(myLatitude, myLongitude) {
+  
   $.ajax({
-    url: weatherUrl,
+    url: '/weather',
+    data: {
+      latitude: myLatitude,
+      longitude: myLongitude,
+    },
     success: function success(data) {
       
       console.log(data);
       
-      var summary = data.weather[0].description;
-      celcius = Math.round(data.main.temp);
+      var summary = data.daily.summary;
+      celcius = Math.round(data.currently.temperature);
       fahrenheit = Math.round(celciusToFahrenheit(celcius));
-      var city = data.name;
-      var iconid = data.weather[0].id;
+      var timezone = data.timezone;
+      var iconId = data.currently.icon
+      .toUpperCase()
+      .replace(/-/g, "_");;
+      
       $(document).ready(function() {
 
-        $("#city").html(city);
+        $("#city").html(timezone);
         $("#summary").html(summary);
-        $("#tempicon").toggleClass("wi-owm-" + iconid, true);
-        $("#temp").html("Temperature: " + celcius + "&deg;");
+        skycons.add("icon1", Skycons[iconId]);
+        skycons.play();
+        $("#temp").html(" Current Temperature: " + celcius + "&deg;");
+        $("#toggleTemp").html("C");
       });
+      
     },
     cache: false,
     error: function error(jqXHR, errorMessage, errorThrown) {
-      console.log(jqXHR.status);
       $("#summary").html(jqXHR.responseText);
     }
   });
@@ -44,32 +54,29 @@ function runWeatherAjax(latitude, longitude) {
 
 function getLocation() {
   navigator.geolocation.getCurrentPosition(showPosition);
-  console.log("hi");
 }
 
 function showPosition(position) {
   var latitude = position.coords.latitude;
   var longitude = position.coords.longitude;
-  console.log(latitude);
-  console.log(position);
-  //country = data.country;
   runWeatherAjax(latitude, longitude);
-  //getWeather(lat, lon);
 }
+
+getLocation();
 
 $(document).ready(function() {
 
-  getLocation();
+  let displayTempCel = true;
 
   $("#toggleTemp").on('click', function() {
     if (displayTempCel == true) {
       $("#toggleTemp").html("F");
-      $("#temp").html("Temperature: " + fahrenheit + "&deg;");
+      $("#temp").html("Current Temperature: " + fahrenheit + "&deg;");
       displayTempCel = false;
     }
     else {
       $("#toggleTemp").html("C");
-      $("#temp").html("Temperature: " + celcius + "&deg;");
+      $("#temp").html("Current Temperature: " + celcius + "&deg;");
       displayTempCel = true;
     }
   });

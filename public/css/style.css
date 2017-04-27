@@ -4,9 +4,7 @@
 }
 
 .myDiv{
-  //height: 5vh;
   margin: 1vh;
-  
 }
 
 h1 {
@@ -32,12 +30,26 @@ p{
 }
 
 body{
-  //background-color: #e3f2fd;
   font-family: 'Roboto', sans-serif;
+}
+
+.divSummary {
+  margin-bottom: 20px;
+  
+}
+
+#summary {
+  margin: 0 auto;
+  width: 80vw;
+  max-width: 500px;
+  font-size: 22px;
+  
 }
 
 .temperature-button{
   height: 26px;
+  line-height: 26px;
+  border-radius: 20px;
   background-color: #1e88e5;
   font-size: 26px;
   padding: 0px;
@@ -46,8 +58,9 @@ body{
   outline: none !important;
 }
 
-temperature-button:hover {
+.temperature-button:hover {
+    padding-left: 10px;
+    padding-right: 10px;
     color: #1e88e5;
     background-color: #e3f2fd;
-    //border-color: #FFFAF3; /*set the color you want here*/
 }
