@@ -1,20 +1,11 @@
 "use strict";
 
-/* global fetch */
 const express = require('express');
 const app = express();
 const path = require('path');
-require('isomorphic-fetch');
+const fetch = require('isomorphic-fetch');
 require('es6-promise').polyfill();
-//var bodyParser = require('body-parser');
 
-//app.use(bodyParser.urlencoded({ extended: true }));
-//app.use(bodyParser.json());
-//app.use(function(req, res, next) {
-//    res.header("Access-Control-Allow-Origin", "*");
-//    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
- //   next();
-//})
 app.use(express.static(path.join(__dirname, 'public')));
 
 const url_prefix = 'https://api.darksky.net/forecast/'+process.env.DARKSKY_SECRET_KEY+'/';
@@ -22,10 +13,8 @@ app.get('/weather', function(req, res) {
   try {
     // Retrieves location coordinates (latitude and longitude) from client request query
     var coordinates = req.query.latitude+','+req.query.longitude;
-    //var coordinates = latitude + ',' + longitude;
-    
     var url = url_prefix + coordinates + '?units=si';
-    console.log('Fetching '+url);
+    console.log('Fetching '+ url);
     
     fetch(url)
       .then(function(response) {
@@ -44,12 +33,9 @@ app.get('/weather', function(req, res) {
   }
 });
 
-
-
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/index.html'));
 });
-
 
 app.listen(process.env.PORT, process.env.IP, function() {
   console.log("App listening on port " + process.env.PORT);
