@@ -6,7 +6,7 @@ A web app that shows the current temperature and weather conditions.
 
 ## Front End Request
 
-The coordinates are POSTed  to the `/weather` path with jQuery's `.ajax()` method.
+A GET request is made to the `/weather` path with jQuery's `.ajax()` method. The user's coordinates are sent as query string data.
 
 ```javascript
 function runWeatherAjax(myLatitude, myLongitude) {
@@ -23,9 +23,7 @@ function runWeatherAjax(myLatitude, myLongitude) {
 
 ## Back-End
 
-
-The NodeJS `app.js` uses the coordinates for the Weather API call.
-Uses the
+The NodeJS Express `/weather` route uses the coordinates to make an API request for weather data from Darksky API.
 
 ```javascript
 const url_prefix = 'https://api.darksky.net/forecast/'+process.env.DARKSKY_SECRET_KEY+'/';
