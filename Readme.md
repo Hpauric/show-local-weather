@@ -4,11 +4,9 @@ A web app that shows the current temperature and weather conditions.
 
 ![](/Weather-435.png)
 
-## API Backend Integration
-
-Uses Darksky API
-
 ## Front End Request
+
+The coordinates are POSTed  to the `/weather` path with jQuery's `.ajax()` method.
 
 ```javascript
 function runWeatherAjax(myLatitude, myLongitude) {
@@ -23,7 +21,11 @@ function runWeatherAjax(myLatitude, myLongitude) {
     }
 ```
 
-Back-End
+## Back-End
+
+
+The NodeJS `app.js` uses the coordinates for the Weather API call.
+Uses the
 
 ```javascript
 const url_prefix = 'https://api.darksky.net/forecast/'+process.env.DARKSKY_SECRET_KEY+'/';
